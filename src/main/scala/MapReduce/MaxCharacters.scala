@@ -34,12 +34,8 @@ package object MaxCharacters {
 
     override def reduce(key: Text, values: lang.Iterable[IntWritable], context: Reducer[Text, IntWritable, Text, IntWritable]#Context): Unit = {
       logger.info("Computing maximum length of message for log type: ", key)
-      //ToDO: replace var and for loop
-      var lst = ArrayBuffer[Int]()
-      for(i <- values.asScala){
-        lst += i.get().toInt
-      }
-      context.write(key, new IntWritable(lst.max))
+      val max = values.asScala.foldLeft(0)(_ max _.get)
+      context.write(key, new IntWritable(max))
     }
   }
 }
