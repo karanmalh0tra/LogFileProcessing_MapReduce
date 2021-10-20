@@ -2,6 +2,7 @@ package MapReduce
 
 import HelperUtils.CreateLogger
 import MapReduce.CountLogTypes.{NumberOfLogsMapper, NumberOfLogsReducer}
+import MapReduce.ErrorTypeCountInIntervalsDecending.{ErrorTypeCountInIntervalsDecendingMapper, ErrorTypeCountInIntervalsDecendingReducer}
 import MapReduce.MaxCharacters.{MaxCharacterReducer, NumberOfCharactersMapper}
 import MapReduce.TimeIntervalDistribution.{NumberOfLogsPerSecondMapper, NumberOfLogsPerSecondReducer}
 import com.typesafe.config.ConfigFactory
@@ -21,6 +22,7 @@ object MapReduceExecutor {
       /*execute first map reduce job
       counts number of log messages per second outputs it in a file.*/
       val configuration = new Configuration
+      configuration.set("mapred.textoutputformat.separatorText",",")
       val job = Job.getInstance(configuration,"count logs per second")
       job.setJarByClass(this.getClass)
       job.setMapperClass(classOf[NumberOfLogsPerSecondMapper])
@@ -33,7 +35,19 @@ object MapReduceExecutor {
       System.exit(if(job.waitForCompletion(true))  0 else 1)
     }
     else if(args(0).contentEquals("2")){
-      //execute second map reduce job
+      /*execute second map reduce job
+      counts number of log messages per second outputs it in a file.*/
+      val configuration = new Configuration
+      val job = Job.getInstance(configuration,"count error logs per second")
+      job.setJarByClass(this.getClass)
+      job.setMapperClass(classOf[ErrorTypeCountInIntervalsDecendingMapper])
+      job.setCombinerClass(classOf[ErrorTypeCountInIntervalsDecendingReducer])
+      job.setReducerClass(classOf[ErrorTypeCountInIntervalsDecendingReducer])
+      job.setOutputKeyClass(classOf[Text]);
+      job.setOutputValueClass(classOf[IntWritable]);
+      FileInputFormat.addInputPath(job, new Path(args(1)))
+      FileOutputFormat.setOutputPath(job, new Path(args(2)))
+      System.exit(if(job.waitForCompletion(true))  0 else 1)
     }
     else if(args(0).contentEquals("3")){
       /*execute third map reduce job
