@@ -25,6 +25,9 @@ sbt clean compile assembly
 ```
 + A Jar will be created in target/scala-3.0.2 named LogProcessing_MapReduce-assembly-0.1.jar
 + scp the jar from the local machine to the Hortonworks HDP VM
+```
+scp -P 2222 .\LogProcessing_MapReduce-assembly-0.1.jar root@{ip address}:/home/hdfs/logprocessing/
+```
 + scp the log file whose analysis is to be computed to the same path in the Hortonworks HDP VM.
 + An example log file is in resources folder named logdata.log
 
@@ -40,7 +43,7 @@ hdfs dfs -copyFromLocal {input_file} {hadoop_storage}/
 ```
 + Execute the Jar. Enter 1,2,3,4 based on the map-reduce task that you want to execute
 ```
-hadoop jar MapReduce_Wordcount-assembly-0.1.jar 4 {hadoop_storage/logdata.log} {hadoop_storage/output_directory}
+hadoop jar LogProcessing_MapReduce-assembly-0.1.jar 4 {hadoop_storage/logdata.log} {hadoop_storage/output_directory}
 ```
 + Check the output by executing the following command
 ```
