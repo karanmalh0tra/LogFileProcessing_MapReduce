@@ -103,9 +103,19 @@ Limitations: This map-reduce requires a pre-defined format of logs in order to w
 The sample outputs from the logs dataset map-reduce implementation would look like:
 
 Output of Job 1:
+<br>
+![image](https://user-images.githubusercontent.com/22276682/138167459-3f5fb19e-698a-4971-b30e-c31f946e2a4d.png)
 
 Output of Job 2:
+<br>
+![image](https://user-images.githubusercontent.com/22276682/138167830-cb2ce99c-afef-4288-bd78-c3e6641fb2d5.png)
 
 Output of Job 3:
+<br>
+![image](https://user-images.githubusercontent.com/22276682/138167975-caa92421-3923-4b77-b5d0-806dcfc41136.png)
 
 Output of Job 4:
+<br>
+![image](https://user-images.githubusercontent.com/22276682/138168116-912e9906-9df8-461f-8aaf-8333853177d9.png)
+
+Video Link:
