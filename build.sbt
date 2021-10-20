@@ -32,5 +32,7 @@ libraryDependencies ++= Seq(
   "org.scalatest" %% "scalatest-featurespec" % scalacticVersion % Test,
   "com.typesafe" % "config" % typesafeConfigVersion,
   "org.scalatest" %% "scalatest" % "3.2.9" % Test,
-  "org.mockito" % "mockito-core" % "4.0.0" % Test
+  "org.mockito" % "mockito-core" % "4.0.0" % Test,
+  "junit" % "junit" % "4.12",
+  "com.novocode" % "junit-interface" % "0.10" % Test
 )

@@ -30,6 +30,7 @@ object MapReduceExecutor {
       job.setMapperClass(classOf[NumberOfLogsPerSecondMapper])
       job.setCombinerClass(classOf[NumberOfLogsPerSecondReducer])
       job.setReducerClass(classOf[NumberOfLogsPerSecondReducer])
+      job.setNumReduceTasks(config.getInt("NO_OF_REDUCERS_TASK1"))
       job.setOutputKeyClass(classOf[Text]);
       job.setOutputValueClass(classOf[IntWritable]);
       FileInputFormat.addInputPath(job, new Path(args(1)))
@@ -48,6 +49,7 @@ object MapReduceExecutor {
       job1.setMapperClass(classOf[ErrorTypeCountInIntervalsDecendingMapper])
       job1.setCombinerClass(classOf[ErrorTypeCountInIntervalsDecendingReducer])
       job1.setReducerClass(classOf[ErrorTypeCountInIntervalsDecendingReducer])
+      job1.setNumReduceTasks(config.getInt("NO_OF_REDUCERS_TASK2"))
       job1.setOutputKeyClass(classOf[Text]);
       job1.setOutputValueClass(classOf[IntWritable]);
       FileInputFormat.addInputPath(job1, new Path(args(1)))
@@ -64,6 +66,7 @@ object MapReduceExecutor {
       job2.setJarByClass(this.getClass)
       job2.setMapperClass(classOf[ErrorTypeCountInIntervalsDecendingMapperFinal])
       job2.setReducerClass(classOf[ErrorTypeCountInIntervalsDecendingReducerFinal])
+      job2.setNumReduceTasks(config.getInt("NO_OF_REDUCERS_TASK2"))
       job2.setMapOutputKeyClass(classOf[IntWritable]);
       job2.setMapOutputValueClass(classOf[Text]);
       job2.setOutputKeyClass(classOf[Text]);
@@ -85,6 +88,7 @@ object MapReduceExecutor {
       job.setMapperClass(classOf[NumberOfLogsMapper])
       job.setCombinerClass(classOf[NumberOfLogsReducer])
       job.setReducerClass(classOf[NumberOfLogsReducer])
+      job.setNumReduceTasks(config.getInt("NO_OF_REDUCERS_TASK3"))
       job.setOutputKeyClass(classOf[Text]);
       job.setOutputValueClass(classOf[IntWritable]);
       FileInputFormat.addInputPath(job, new Path(args(1)))
@@ -102,6 +106,7 @@ object MapReduceExecutor {
       job.setMapperClass(classOf[NumberOfCharactersMapper])
       job.setCombinerClass(classOf[MaxCharacterReducer])
       job.setReducerClass(classOf[MaxCharacterReducer])
+      job.setNumReduceTasks(config.getInt("NO_OF_REDUCERS_TASK4"))
       job.setOutputKeyClass(classOf[Text]);
       job.setOutputValueClass(classOf[IntWritable]);
       FileInputFormat.addInputPath(job, new Path(args(1)))
