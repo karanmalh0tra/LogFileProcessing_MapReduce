@@ -1,6 +1,10 @@
 # LogFileProcessing
 An Apache Hadoop program for experimenting with parallel distributed processing of large dataset of logs using the Map/Reduce Model.
 
+---
+Name: Karan Malhotra
+---
+
 ### Installations
 + Install [Simple Build Toolkit (SBT)](https://www.scala-sbt.org/1.x/docs/index.html)
 + Ensure you can create, compile and run Java and Scala programs.
