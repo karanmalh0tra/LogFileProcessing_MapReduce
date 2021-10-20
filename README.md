@@ -79,6 +79,26 @@ This Project covers 4 map-reduce jobs.
 
 All the outputs are stored as Comma-Separated Values(CSV).
 
+### Configuration Parameters of the LogFileGenerator
+Clone the [github repo](https://github.com/0x1DOCD00D/LogFileGenerator) which is a scala program to generate log files.
+The changes I made to create my sample log file were:
+- Increased the MaxCount to get more lines of log. `MaxCount = 1000`
+Limited the count to 1000 to upload the sample log file in this repository.
+- Increased the non-overlapping likelihood range of error message types.
+This was done in order to clearly differentiate between the number of ERROR log types for the Job 2.
+```
+logMessageType {
+    error = [0, 0.25]
+    warn = [0.25, 0.3]
+    debug = [0.3, 0.5]
+    info = [0.5, 1]
+  }
+```
+Limitations: This map-reduce requires a pre-defined format of logs in order to work. An example format is:
+``` 
+09:58:55.881 [scala-execution-context-global-17] INFO  GenerateLogData$ - NL8Q%rvl,RBHq@|XR2U&k>"SXwcyB#iv
+```
+
 ### Output
 The sample outputs from the logs dataset map-reduce implementation would look like:
 
