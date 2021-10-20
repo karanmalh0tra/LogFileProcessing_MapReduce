@@ -3,6 +3,7 @@ package MapReduce
 import HelperUtils.CreateLogger
 import MapReduce.CountLogTypes.{NumberOfLogsMapper, NumberOfLogsReducer}
 import MapReduce.MaxCharacters.{MaxCharacterReducer, NumberOfCharactersMapper}
+import MapReduce.TimeIntervalDistribution.{NumberOfLogsPerSecondMapper, NumberOfLogsPerSecondReducer}
 import com.typesafe.config.ConfigFactory
 import org.apache.hadoop.conf.Configuration
 import org.apache.hadoop.fs.Path
@@ -17,7 +18,19 @@ object MapReduceExecutor {
     val config = ConfigFactory.load("application")
 
     if(args(0).contentEquals("1")){
-      //execute first map reduce
+      /*execute first map reduce job
+      counts number of log messages per second outputs it in a file.*/
+      val configuration = new Configuration
+      val job = Job.getInstance(configuration,"count logs per second")
+      job.setJarByClass(this.getClass)
+      job.setMapperClass(classOf[NumberOfLogsPerSecondMapper])
+      job.setCombinerClass(classOf[NumberOfLogsPerSecondReducer])
+      job.setReducerClass(classOf[NumberOfLogsPerSecondReducer])
+      job.setOutputKeyClass(classOf[Text]);
+      job.setOutputValueClass(classOf[IntWritable]);
+      FileInputFormat.addInputPath(job, new Path(args(1)))
+      FileOutputFormat.setOutputPath(job, new Path(args(2)))
+      System.exit(if(job.waitForCompletion(true))  0 else 1)
     }
     else if(args(0).contentEquals("2")){
       //execute second map reduce job
