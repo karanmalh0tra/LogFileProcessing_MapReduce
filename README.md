@@ -19,6 +19,11 @@ Name: Karan Malhotra
 + VMware Workstation Pro
 + Hortonworks HDP Sandbox
 
+### Deployment Environment
++ Hortonworks HDP Sandbox
+<br/>OR
++ Amazon S3 Bucket + AWS Elastic Map Reduce (EMR)
+
 ### Steps to Run the Application
 #### Perform the below steps on your local machine
 + Clone the repository
