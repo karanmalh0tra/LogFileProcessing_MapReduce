@@ -23,7 +23,7 @@ package object MaxCharacters {
     override def map(key: Object, value: Text, context: Mapper[Object, Text, Text, IntWritable]#Context): Unit = {
       logger.info("Collecting the length of message from each line of log...")
       val inputLineList = value.toString.split(" ").toList
-      word.set(inputLineList(2))
+      word.set(inputLineList(2)) //set the logtype which is the second index after we split based on space
       context.write(word,new IntWritable(inputLineList.last.length))
     }
 
@@ -34,7 +34,7 @@ package object MaxCharacters {
 
     override def reduce(key: Text, values: lang.Iterable[IntWritable], context: Reducer[Text, IntWritable, Text, IntWritable]#Context): Unit = {
       logger.info("Computing maximum length of message for log type: ", key)
-      val max = values.asScala.foldLeft(0)(_ max _.get)
+      val max = values.asScala.foldLeft(0)(_ max _.get) //easy logic to calculate max
       context.write(key, new IntWritable(max))
     }
   }

@@ -24,9 +24,11 @@ object MapReduceExecutor {
       /*execute first map reduce job
       counts number of log messages per second outputs it in a file.*/
       val configuration = new Configuration
+      //for , separated values
       configuration.set("mapred.textoutputformat.separator",",")
       val job = Job.getInstance(configuration,"count logs per second")
       job.setJarByClass(this.getClass)
+      //Set Mapper and Reducers
       job.setMapperClass(classOf[NumberOfLogsPerSecondMapper])
       job.setCombinerClass(classOf[NumberOfLogsPerSecondReducer])
       job.setReducerClass(classOf[NumberOfLogsPerSecondReducer])
@@ -46,6 +48,7 @@ object MapReduceExecutor {
       val configuration = new Configuration
       val job1 = Job.getInstance(configuration,"count error logs per second")
       job1.setJarByClass(this.getClass)
+      //Set Mapper and Reducers
       job1.setMapperClass(classOf[ErrorTypeCountInIntervalsDecendingMapper])
       job1.setCombinerClass(classOf[ErrorTypeCountInIntervalsDecendingReducer])
       job1.setReducerClass(classOf[ErrorTypeCountInIntervalsDecendingReducer])
@@ -61,9 +64,11 @@ object MapReduceExecutor {
       sort the error logs in seconds interval in a descending order of the errors present in the intervals
       */
       val configuration2 = new Configuration
+      //for , separated values
       configuration2.set("mapred.textoutputformat.separator",",")
       val job2 = Job.getInstance(configuration2,"count error logs per second final")
       job2.setJarByClass(this.getClass)
+      //Set Mapper and Reducers
       job2.setMapperClass(classOf[ErrorTypeCountInIntervalsDecendingMapperFinal])
       job2.setReducerClass(classOf[ErrorTypeCountInIntervalsDecendingReducerFinal])
       job2.setNumReduceTasks(config.getInt("NO_OF_REDUCERS_TASK2"))
@@ -83,9 +88,11 @@ object MapReduceExecutor {
       log types include ALL, INFO, WARN, DEBUG, ERROR, FATAL, TRACE, OFF
       */
       val configuration = new Configuration
+      //for , separated values
       configuration.set("mapred.textoutputformat.separator",",")
       val job = Job.getInstance(configuration,"count log types")
       job.setJarByClass(this.getClass)
+      //Set Mapper and Reducers
       job.setMapperClass(classOf[NumberOfLogsMapper])
       job.setCombinerClass(classOf[NumberOfLogsReducer])
       job.setReducerClass(classOf[NumberOfLogsReducer])
@@ -102,9 +109,11 @@ object MapReduceExecutor {
       displays the maximum log message length for each log type
       */
       val configuration = new Configuration
+      //for , separated values
       configuration.set("mapred.textoutputformat.separator",",")
       val job = Job.getInstance(configuration,"max length of message types")
       job.setJarByClass(this.getClass)
+      //Set Mapper and Reducers
       job.setMapperClass(classOf[NumberOfCharactersMapper])
       job.setCombinerClass(classOf[MaxCharacterReducer])
       job.setReducerClass(classOf[MaxCharacterReducer])

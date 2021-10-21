@@ -30,7 +30,7 @@ package object CountLogTypes {
     override def map(key: Object, value: Text, context: Mapper[Object, Text, Text, IntWritable]#Context): Unit = {
       logger.info("Collecting the frequency of each log types...")
       val inputLineList = value.toString.split(" ")
-      word.set(inputLineList(2))
+      word.set(inputLineList(2)) //index 2 gives the log type when a line of log is split by space
       context.write(word,one)
     }
 
@@ -41,7 +41,7 @@ package object CountLogTypes {
 
     override def reduce(key: Text, values: lang.Iterable[IntWritable], context: Reducer[Text, IntWritable, Text, IntWritable]#Context): Unit = {
       logger.info("Computing count for log type: ", key)
-      val sum = values.asScala.foldLeft(0)(_ + _.get)
+      val sum = values.asScala.foldLeft(0)(_ + _.get) //adds the total for each log type
       context.write(key, new IntWritable(sum))
     }
   }

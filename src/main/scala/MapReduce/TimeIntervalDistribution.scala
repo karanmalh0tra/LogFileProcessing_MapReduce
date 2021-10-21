@@ -26,8 +26,9 @@ package object TimeIntervalDistribution {
 
     override def map(key: Object, value: Text, context: Mapper[Object, Text, Text, IntWritable]#Context): Unit = {
       logger.info("Collecting the frequency of logs per second...")
+      //fetch timestamp till seconds and ignore the miliseconds in the 0th index of timeStampList
       val timeStampList = value.toString.split('.').toList
-      val logType = value.toString.split(" ")(2)
+      val logType = value.toString.split(" ")(2) //fetch the logtype in the second index after we split on space
       word.set(timeStampList(0)+','+logType)
       context.write(word,one)
     }
@@ -38,7 +39,7 @@ package object TimeIntervalDistribution {
 
     override def reduce(key: Text, values: lang.Iterable[IntWritable], context: Reducer[Text, IntWritable, Text, IntWritable]#Context): Unit = {
       logger.info("Computing count per each second. The current time is: ", key)
-      val sum = values.asScala.foldLeft(0)(_ + _.get)
+      val sum = values.asScala.foldLeft(0)(_ + _.get) //calculate the sum
       context.write(key, new IntWritable(sum))
     }
   }
