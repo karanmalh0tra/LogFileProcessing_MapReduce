@@ -83,6 +83,7 @@ object MapReduceExecutor {
       log types include ALL, INFO, WARN, DEBUG, ERROR, FATAL, TRACE, OFF
       */
       val configuration = new Configuration
+      configuration.set("mapred.textoutputformat.separator",",")
       val job = Job.getInstance(configuration,"count log types")
       job.setJarByClass(this.getClass)
       job.setMapperClass(classOf[NumberOfLogsMapper])
@@ -101,6 +102,7 @@ object MapReduceExecutor {
       displays the maximum log message length for each log type
       */
       val configuration = new Configuration
+      configuration.set("mapred.textoutputformat.separator",",")
       val job = Job.getInstance(configuration,"max length of message types")
       job.setJarByClass(this.getClass)
       job.setMapperClass(classOf[NumberOfCharactersMapper])
